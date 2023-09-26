@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, React } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import arrow from "@/public/icon-arrow.svg";
 
