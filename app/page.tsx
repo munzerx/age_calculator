@@ -5,9 +5,9 @@ import Image from "next/image";
 import arrow from "@/public/icon-arrow.svg";
 
 export default function Home() {
-  const [day, setDay] = useState(null);
-  const [month, setMonth] = useState(null);
-  const [year, setYear] = useState(null);
+  const [day, setDay] = useState("");
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
 
   const [dayError, setDayError] = useState(false);
   const [monthError, setMonthError] = useState(false);
@@ -17,18 +17,18 @@ export default function Home() {
   const [ageMonth, setAgeMonth] = useState<number | null>(null);
   const [ageDay, setAgeDay] = useState<number | null>(null);
 
-  function calculateAge(e: FormEvent<HTMLFormElement>) {
+  function calculateAge(e) {
     e.preventDefault();
 
     // Check if day is empty
-    if (day === null || day <= 0 || day > 31) {
+    if (day === null || parseFloat(day) <= 0 || parseFloat(day) > 31) {
       setDayError(true);
     } else {
       setDayError(false);
     }
 
     // Check if month is empty
-    if (month === null || month <= 0 || month > 12) {
+    if (month === null || parseFloat(month) <= 0 || parseFloat(month) > 12) {
       setMonthError(true);
     } else {
       setMonthError(false);
@@ -36,7 +36,7 @@ export default function Home() {
 
     // Check if year is empty
     const currentDate = new Date();
-    if (year === null || year <= 0 || year > currentDate.getFullYear()) {
+    if (year === null || parseFloat(year) <= 0 || parseFloat(year) > currentDate.getFullYear()) {
       setYearError(true);
     } else {
       setYearError(false);
@@ -44,7 +44,7 @@ export default function Home() {
 
     // Only proceed if all fields are filled
     if (day !== null && month !== null && year !== null) {
-      const birthDate = new Date(year, month - 1, day, 0, 0, 0, 0);
+      const birthDate = new Date(parseFloat(year), parseFloat(month) - 1, day, 0, 0, 0, 0);
 
       const birthDateSeconds = birthDate.getTime();
       const currentDateSeconds = currentDate.getTime();
