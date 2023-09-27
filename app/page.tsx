@@ -17,34 +17,50 @@ export default function Home() {
   const [ageMonth, setAgeMonth] = useState<number | null>(null);
   const [ageDay, setAgeDay] = useState<number | null>(null);
 
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  console.log(currentYear);
+
   function calculateAge(e) {
     e.preventDefault();
 
     // Check if day is empty
-    if (day === null || parseFloat(day) <= 0 || parseFloat(day) > 31) {
+    if (day === "" || parseFloat(day) <= 0 || parseFloat(day) > 31) {
       setDayError(true);
     } else {
       setDayError(false);
     }
 
     // Check if month is empty
-    if (month === null || parseFloat(month) <= 0 || parseFloat(month) > 12) {
+    if (month === "" || parseFloat(month) <= 0 || parseFloat(month) > 12) {
       setMonthError(true);
     } else {
       setMonthError(false);
     }
 
     // Check if year is empty
-    const currentDate = new Date();
-    if (year === null || parseFloat(year) <= 0 || parseFloat(year) > currentDate.getFullYear()) {
+
+    if (
+      year === "" ||
+      parseFloat(year) <= 0 ||
+      parseFloat(year) > currentDate.getFullYear()
+    ) {
       setYearError(true);
     } else {
       setYearError(false);
     }
 
     // Only proceed if all fields are filled
-    if (day !== null && month !== null && year !== null) {
-      const birthDate = new Date(parseFloat(year), parseFloat(month) - 1, parseFloat(day), 0, 0, 0, 0);
+    if (day !== "" && month !== "" && year !== "") {
+      const birthDate = new Date(
+        parseFloat(year),
+        parseFloat(month) - 1,
+        parseFloat(day),
+        0,
+        0,
+        0,
+        0
+      );
 
       const birthDateSeconds = birthDate.getTime();
       const currentDateSeconds = currentDate.getTime();
@@ -80,7 +96,6 @@ export default function Home() {
                 }`}
                 placeholder="DD"
                 type="number"
-                maxLength={2}
                 max={31}
                 name="day"
                 value={day}
@@ -135,7 +150,7 @@ export default function Home() {
                 }`}
                 placeholder="YYYY"
                 type="number"
-                maxLength={4}
+                max={currentYear}
                 name="year"
                 value={year}
                 onChange={(e) => setYear(e.target.value)}
@@ -154,23 +169,31 @@ export default function Home() {
             <hr />
             <button
               type="submit"
+              title="Find Age"
               className="rounded-full bg-[hsl(259,100%,65%)] p-4 absolute right-7 -top-9 hover:bg-black"
             >
-              <Image alt="" src={arrow} />
+              <Image alt="" src={arrow} priority={false} />
             </button>
           </div>
         </form>
         <div className="flex flex-col text-8xl italic gap-3 py-4 px-4">
           <div className="flex flex-row">
-            <p className="font-extrabold text-[hsl(259,100%,65%)]">{ageYear !== null ? ageYear : "--"}</p>
+            <p className="font-extrabold text-[hsl(259,100%,65%)]">
+              {ageYear !== null ? ageYear : "--"}
+            </p>
             <label className="font-extrabold">years</label>
           </div>
           <div className="flex flex-row">
-            <p className="font-extrabold text-[hsl(259,100%,65%)]"> {ageMonth !== null ? ageMonth : "--"}</p>
+            <p className="font-extrabold text-[hsl(259,100%,65%)]">
+              {" "}
+              {ageMonth !== null ? ageMonth : "--"}
+            </p>
             <label className="font-extrabold">months</label>
           </div>
           <div className="flex flex-row">
-            <p className="font-extrabold text-[hsl(259,100%,65%)]">{ageDay !== null ? ageDay : "--"}</p>
+            <p className="font-extrabold text-[hsl(259,100%,65%)]">
+              {ageDay !== null ? ageDay : "--"}
+            </p>
             <label className="font-extrabold">days</label>
           </div>
         </div>
