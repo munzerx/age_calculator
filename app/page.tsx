@@ -44,7 +44,7 @@ export default function Home() {
 
     // Only proceed if all fields are filled
     if (day !== null && month !== null && year !== null) {
-      const birthDate = new Date(parseFloat(year), parseFloat(month) - 1, day, 0, 0, 0, 0);
+      const birthDate = new Date(parseFloat(year), parseFloat(month) - 1, parseFloat(day), 0, 0, 0, 0);
 
       const birthDateSeconds = birthDate.getTime();
       const currentDateSeconds = currentDate.getTime();
