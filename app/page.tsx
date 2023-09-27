@@ -5,13 +5,13 @@ import Image from "next/image";
 import arrow from "@/public/icon-arrow.svg";
 
 export default function Home() {
-  const [day, setDay] = useState<number>("");
-  const [month, setMonth] = useState<number>("");
-  const [year, setYear] = useState<number>("");
+  const [day, setDay] = useState(null);
+  const [month, setMonth] = useState(null);
+  const [year, setYear] = useState(null);
 
-  const [dayError, setDayError] = useState<boolean>(false);
-  const [monthError, setMonthError] = useState<boolean>(false);
-  const [yearError, setYearError] = useState<boolean>(false);
+  const [dayError, setDayError] = useState(false);
+  const [monthError, setMonthError] = useState(false);
+  const [yearError, setYearError] = useState(false);
 
   const [ageYear, setAgeYear] = useState<number | null>(null);
   const [ageMonth, setAgeMonth] = useState<number | null>(null);
